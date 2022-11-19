@@ -1,18 +1,65 @@
-import * as React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 MaterialCommunityIcons.loadFont();
+import SQLite from 'react-native-sqlite-storage';
+
+function errorCB(err) {
+  console.log('SQL Error: ' + err);
+}
+
+function successCB() {
+  console.log('SQL executed fine');
+}
+
+function openCB() {
+  console.log('Database OPENED');
+}
+
+const db = SQLite.openDatabase(
+  {name: 'yellowjacketDB', location: 'default'},
+  openCB,
+  errorCB,
+);
 
 function Home() {
+  const [itemIDs = [], setID] = useState('');
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    try {
+      db.transaction(t => {
+        t.executeSql(
+          'SELECT * FROM Clothing',
+          [],
+          (t,
+          results => {
+            const length = results.rows.length;
+            if (length > 0) {
+              console.log('has length');
+              results.rows.forEach(row => {
+                const itemID = row.ID;
+                setID(itemID);
+              });
+            }
+          }),
+        );
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <View
       style={{
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        borderBottomLeftRadius: '25px',
       }}>
       <Text>Home!</Text>
     </View>
@@ -101,6 +148,20 @@ function MyTabs() {
 }
 
 export default function App() {
+  useEffect(() => {
+    createTable();
+  }, []);
+
+  const createTable = () => {
+    db.transaction(t => {
+      t.executeSql(
+        'CREATE TABLE IF NOT EXISTS ' +
+          'Clothing ' +
+          ' (ID INTEGER PRIMARY KEY AUTOINCREMENT, ArticleType TEXT, Colors TEXT, Img Blob',
+      );
+    });
+  };
+
   return (
     <NavigationContainer>
       <MyTabs />
