@@ -46,7 +46,16 @@ function MyTabs() {
         tabBarStyle: {backgroundColor: '#F8F2D5'},
         tabBarShowLabel: false,
       }}>
-      {' '}
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
