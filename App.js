@@ -12,6 +12,13 @@ function Home() {
     </View>
   )
 }
+function Closet() {
+  return(
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <Text>My Closet!</Text>
+    </View>
+  )
+}
 
 const Tab = createBottomTabNavigator();
 
