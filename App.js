@@ -7,7 +7,13 @@ MaterialCommunityIcons.loadFont();
 
 function Home() {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderBottomLeftRadius: '25px',
+      }}>
       <Text>Home!</Text>
     </View>
   );
@@ -41,9 +47,9 @@ function MyTabs() {
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={{
-        tabBarActiveTintColor: '#E1C951',
-        tabBarInactiveTintColor: '#C0A521',
-        tabBarStyle: {backgroundColor: '#F8F2D5'},
+        tabBarActiveTintColor: '#F1FFBB',
+        tabBarInactiveTintColor: '#95978E',
+        tabBarStyle: {backgroundColor: '#E9E8E0'},
         tabBarShowLabel: false,
       }}>
       <Tab.Screen
