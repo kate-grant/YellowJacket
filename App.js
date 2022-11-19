@@ -56,6 +56,20 @@ function MyTabs() {
           ),
         }}
       />
+      <Tab.Screen
+        name="Closet"
+        component={Closet}
+        options={{
+          tabBarLabel: 'My Closet',
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons
+              name="tshirt-crew"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
