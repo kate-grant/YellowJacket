@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View} from 'react-native';
+import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 MaterialCommunityIcons.loadFont();
 import SQLite from 'react-native-sqlite-storage';
 
+// DATABASE
 function errorCB(err) {
   console.log('SQL Error: ' + err);
 }
@@ -24,6 +25,7 @@ const db = SQLite.openDatabase(
   errorCB,
 );
 
+// COMPONENTS
 function Home() {
   const [itemIDs = [], setID] = useState('');
   useEffect(() => {
@@ -60,15 +62,27 @@ function Home() {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#FFFFFF',
       }}>
       <Text>Home!</Text>
     </View>
   );
 }
-function Closet() {
+function Closet({navigation}) {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#FFFFFF',
+      }}>
       <Text>My Closet!</Text>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Home')}
+        style={styles.buttonStyle}>
+        <Text style={styles.btnText}>Add Item</Text>
+      </TouchableOpacity>
     </View>
   );
 }
@@ -87,6 +101,7 @@ function Profile() {
   );
 }
 
+// NAVIGATION
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
@@ -147,6 +162,7 @@ function MyTabs() {
   );
 }
 
+// APP
 export default function App() {
   useEffect(() => {
     createTable();
@@ -168,3 +184,22 @@ export default function App() {
     </NavigationContainer>
   );
 }
+
+// STYLE
+const styles = StyleSheet.create({
+  btnText: {
+    color: '#F1FFBB',
+    textAlign: 'center',
+  },
+  buttonStyle: {
+    backgroundColor: '#D3BAF2',
+    height: 40,
+    width: 'fitcontent',
+    padding: 10,
+    margin: 5,
+    alignItems: 'center',
+    borderRadius: 25,
+    display: 'flex',
+    justifyContent: 'center',
+  },
+});
