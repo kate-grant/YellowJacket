@@ -6,38 +6,48 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 MaterialCommunityIcons.loadFont();
 
 function Home() {
-  return(
+  return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>Home!</Text>
     </View>
-  )
+  );
 }
 function Closet() {
-  return(
+  return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>My Closet!</Text>
     </View>
-  )
+  );
 }
 function Search() {
-  return(
+  return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>Search!</Text>
     </View>
-  )
+  );
 }
 function Profile() {
-  return(
+  return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
       <Text>Profile!</Text>
     </View>
-  )
+  );
 }
 
 const Tab = createBottomTabNavigator();
 
 function MyTabs() {
   return (
+    <Tab.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        tabBarActiveTintColor: '#E1C951',
+        tabBarInactiveTintColor: '#C0A521',
+        tabBarStyle: {backgroundColor: '#F8F2D5'},
+        tabBarShowLabel: false,
+      }}>
+      {' '}
+    </Tab.Navigator>
   );
 }
 
