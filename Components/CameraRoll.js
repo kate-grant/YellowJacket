@@ -1,14 +1,36 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
-import {Text, View, TouchableOpacity, StyleSheet, Image} from 'react-native';
-import {useCameraRoll} from '@react-native-camera-roll/camera-roll';
+import {
+  Text,
+  View,
+  TouchableHighlight,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
+import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 import {FlatList, ScrollView} from 'react-native-gesture-handler';
 
-export default function CameraRoll({navigation}) {
-  const [photos, getPhotos, save] = useCameraRoll();
+const fetchPhotos = async () => {
+  try {
+    const data = await CameraRoll.getPhotos({first: 21, assetType: 'Photos'});
+    // console.log(data);
+    return data.edges;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export default function CameraRollView({navigation}) {
+  const [images, setImages] = useState([]);
   useEffect(() => {
-    getPhotos({first: 21, assetType: 'Photos'});
-  });
+    async function fetchData() {
+      const photos = await fetchPhotos();
+      setImages(photos);
+    }
+    fetchData();
+  }, []);
+  console.log('loading');
   return (
     <View
       style={{
@@ -17,20 +39,32 @@ export default function CameraRoll({navigation}) {
         alignItems: 'center',
         backgroundColor: '#F1FFBB',
       }}>
+      <TouchableOpacity onPress={() => navigation.navigate('ItemForm')}>
+        <Text>To Form</Text>
+      </TouchableOpacity>
       <ScrollView>
-        {photos.edges.map((photo, index) => {
+        {images.map((photo, index) => {
           return (
-            <Image
+            <TouchableHighlight
               key={index}
-              style={{
-                width: 300,
-                height: 300,
-              }}
-              source={{uri: photo.node.image.uri}}
-            />
+              onPress={() =>
+                navigation.navigate('Closet-Outer', {
+                  screen: 'ItemForm',
+                })
+              }>
+              <Image
+                style={{
+                  width: 300,
+                  height: 300,
+                }}
+                source={{uri: photo.node.image.uri}}
+              />
+            </TouchableHighlight>
           );
         })}
       </ScrollView>
     </View>
   );
 }
+
+// CameraRollView.defaultProps = {images: []};
