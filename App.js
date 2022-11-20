@@ -91,60 +91,70 @@ const Tab = createBottomTabNavigator();
 
 function MyTabs() {
   return (
-    <Tab.Navigator
-      initialRouteName="Home"
-      screenOptions={{
-        tabBarActiveTintColor: '#F1FFBB',
-        tabBarInactiveTintColor: '#95978E',
-        tabBarStyle: {backgroundColor: '#E9E8E0'},
-        tabBarShowLabel: false,
-      }}>
-      <Tab.Screen
-        name="Home"
-        component={Home}
-        options={{
-          tabBarLabel: 'Home',
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Closet"
-        component={AddItemsNavigator}
-        options={{
-          tabBarLabel: 'My Closet',
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons
-              name="tshirt-crew"
-              color={color}
-              size={size}
-            />
-          ),
-          headerShown: false,
-        }}
-      />
-      <Tab.Screen
-        name="Search"
-        component={Search}
-        options={{
-          tabBarLabel: 'Search',
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="magnify" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          tabBarLabel: 'Profile',
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
+    <NavigationContainer>
+      <Tab.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          tabBarActiveTintColor: '#F1FFBB',
+          tabBarInactiveTintColor: '#95978E',
+          tabBarStyle: {backgroundColor: '#E9E8E0'},
+          tabBarShowLabel: false,
+        }}>
+        <Tab.Screen
+          name="Home"
+          component={Home}
+          options={{
+            tabBarLabel: 'Home',
+            tabBarIcon: ({color, size}) => (
+              <MaterialCommunityIcons name="home" color={color} size={size} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Closet-Outer"
+          component={AddItemsNavigator}
+          options={{
+            tabBarLabel: 'My Closet',
+            tabBarIcon: ({color, size}) => (
+              <MaterialCommunityIcons
+                name="tshirt-crew"
+                color={color}
+                size={size}
+              />
+            ),
+            headerShown: false,
+          }}
+        />
+        <Tab.Screen
+          name="Search"
+          component={Search}
+          options={{
+            tabBarLabel: 'Search',
+            tabBarIcon: ({color, size}) => (
+              <MaterialCommunityIcons
+                name="magnify"
+                color={color}
+                size={size}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            tabBarLabel: 'Profile',
+            tabBarIcon: ({color, size}) => (
+              <MaterialCommunityIcons
+                name="account"
+                color={color}
+                size={size}
+              />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 
@@ -164,11 +174,7 @@ export default function App() {
     });
   };
 
-  return (
-    <NavigationContainer>
-      <MyTabs />
-    </NavigationContainer>
-  );
+  return <MyTabs />;
 }
 
 // STYLE
