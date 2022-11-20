@@ -13,7 +13,6 @@ export default function AddItem({navigation}) {
         alignItems: 'center',
         backgroundColor: '#F1FFBB',
       }}>
-      <Text>AddItemPage</Text>
       <TouchableOpacity
         onPress={() => navigation.navigate('AddItem')}
         style={styles.buttonStyle}>
