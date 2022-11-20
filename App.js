@@ -1,7 +1,9 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
 import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {AddItemsNavigator} from './CustomNavigator';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 MaterialCommunityIcons.loadFont();
 import SQLite from 'react-native-sqlite-storage';
@@ -68,24 +70,7 @@ function Home() {
     </View>
   );
 }
-function Closet({navigation}) {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#FFFFFF',
-      }}>
-      <Text>My Closet!</Text>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('Home')}
-        style={styles.buttonStyle}>
-        <Text style={styles.btnText}>Add Item</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
+
 function Search() {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -126,7 +111,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Closet"
-        component={Closet}
+        component={AddItemsNavigator}
         options={{
           tabBarLabel: 'My Closet',
           tabBarIcon: ({color, size}) => (
@@ -136,6 +121,7 @@ function MyTabs() {
               size={size}
             />
           ),
+          headerShown: false,
         }}
       />
       <Tab.Screen
@@ -194,7 +180,6 @@ const styles = StyleSheet.create({
   buttonStyle: {
     backgroundColor: '#D3BAF2',
     height: 40,
-    width: 'fitcontent',
     padding: 10,
     margin: 5,
     alignItems: 'center',
