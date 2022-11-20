@@ -20,7 +20,9 @@ export default function AddItem({navigation}) {
         <Text style={styles.btnText}>Take Photo</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => navigation.navigate('CameraRoll')}
+        onPress={() =>
+          navigation.navigate('Closet-Outer', {screen: 'CameraRoll'})
+        }
         style={styles.buttonStyle}>
         <Text style={styles.btnText}>Upload from Gallery</Text>
       </TouchableOpacity>
