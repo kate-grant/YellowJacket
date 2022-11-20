@@ -13,7 +13,7 @@ export default function Closet({navigation}) {
       }}>
       <Text>My Closet!</Text>
       <TouchableOpacity
-        onPress={() => navigation.navigate('AddItem')}
+        onPress={() => navigation.navigate('Closet-Outer', {screen: 'AddItem'})}
         style={styles.buttonStyle}>
         <Text style={styles.btnText}>Add Item</Text>
       </TouchableOpacity>
