@@ -30,7 +30,6 @@ export default function CameraRollView({navigation}) {
     }
     fetchData();
   }, []);
-  console.log('loading');
   return (
     <View
       style={{
