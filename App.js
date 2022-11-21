@@ -48,11 +48,52 @@ function Home() {
     <View
       style={{
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#FFFFFF',
+        zIndex: 0,
       }}>
-      <Text>Home!</Text>
+      <View
+        style={{
+          width: 200,
+          height: 300,
+          borderBottomLeftRadius: 100 / 2,
+          backgroundColor: '#F1FFBB',
+          transform: [{scaleX: 2}],
+        }}></View>
+      <Text
+        style={{
+          color: '#D3BAF2',
+          fontSize: 30,
+          margin: 20,
+          alignSelf: 'flex-start',
+          position: 'absolute',
+          top: 0,
+          zIndex: 10,
+        }}>
+        Looking Sharp!
+      </Text>
+      <View
+        style={{
+          width: 200,
+          height: 100,
+          borderRadius: 50,
+          backgroundColor: '#E9E8E0',
+          padding: 10,
+          margin: 5,
+          justifyContent: 'center',
+          alignItems: 'center',
+          display: 'flex',
+          position: 'absolute',
+          top: 275,
+        }}>
+        <Text
+          style={{
+            fontSize: 20,
+            color: '#D3BAF2',
+          }}>
+          No Outfits
+        </Text>
+      </View>
     </View>
   );
 }
