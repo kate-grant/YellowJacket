@@ -1,58 +1,44 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useEffect, useState} from 'react';
-import {Text, View, TouchableOpacity, StyleSheet} from 'react-native';
+import {Text, Image, View, TouchableOpacity, StyleSheet} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {AddItemsNavigator} from './CustomNavigator';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 MaterialCommunityIcons.loadFont();
 import SQLite from 'react-native-sqlite-storage';
-
-// DATABASE
-function errorCB(err) {
-  console.log('SQL Error: ' + err);
-}
-
-function successCB() {
-  console.log('SQL executed fine');
-}
-
-function openCB() {
-  console.log('Database OPENED');
-}
-
-const db = SQLite.openDatabase(
-  {name: 'yellowjacketDB', location: 'default'},
-  openCB,
-  errorCB,
-);
+import db, {errorCB} from './Database/db';
+import {ScrollView} from 'react-native-gesture-handler';
 
 // COMPONENTS
 function Home() {
-  const [itemIDs = [], setID] = useState('');
+  console.log('Home');
+  const [items = [], setItems] = useState([]);
   useEffect(() => {
-    getData();
+    async function fetchData() {
+      try {
+        await getData();
+        console.log('in fetch', items);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
   }, []);
 
-  const getData = async () => {
+  const getData = () => {
+    console.log('get');
     try {
-      db.transaction(t => {
-        t.executeSql(
-          'SELECT * FROM Clothing',
-          [],
-          (t,
-          results => {
-            const length = results.rows.length;
-            if (length > 0) {
-              console.log('has length');
-              results.rows.forEach(row => {
-                const itemID = row.ID;
-                setID(itemID);
-              });
-            }
-          }),
-        );
-      });
+      db.transaction(tx => {
+        console.log('in get');
+        tx.executeSql('SELECT * FROM Clothing ', [], (tx, res) => {
+          const temp = [];
+          for (let i = 0; i < res.rows.length; ++i) {
+            temp.push(res.rows.item(i));
+          }
+          setItems(temp);
+        });
+      }, errorCB);
     } catch (error) {
       console.log(error);
     }
@@ -165,13 +151,25 @@ export default function App() {
   }, []);
 
   const createTable = () => {
-    db.transaction(t => {
-      t.executeSql(
-        'CREATE TABLE IF NOT EXISTS ' +
-          'Clothing ' +
-          ' (ID INTEGER PRIMARY KEY AUTOINCREMENT, ArticleType TEXT, Colors TEXT, Img Blob',
-      );
-    });
+    try {
+      db.transaction(tx => {
+        console.log('in create');
+        tx.executeSql(
+          'CREATE TABLE IF NOT EXISTS Clothing (ID INTEGER PRIMARY KEY AUTOINCREMENT, ArticleType TEXT, Colors TEXT, Img BLOB)',
+          [],
+          (tx, res) => {
+            const length = res.rows.length;
+            console.log('before if');
+            if (length > 0) {
+              console.log('created has length');
+              return res.rows;
+            }
+          },
+        );
+      }, errorCB);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return <MyTabs />;
