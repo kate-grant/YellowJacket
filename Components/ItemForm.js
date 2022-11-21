@@ -40,6 +40,7 @@ export default function ItemForm({navigation, route}) {
       console.log(error);
     }
   };
+
   return (
     <View
       style={{
@@ -68,7 +69,12 @@ export default function ItemForm({navigation, route}) {
         style={styles.inputStyle}
         value={color}
       />
-      <TouchableOpacity style={styles.buttonStyle} onPress={() => setData()}>
+      <TouchableOpacity
+        style={styles.buttonStyle}
+        onPress={async () => {
+          setData();
+          navigation.navigate('Closet');
+        }}>
         <Text style={styles.btnText}>Submit</Text>
       </TouchableOpacity>
     </View>
