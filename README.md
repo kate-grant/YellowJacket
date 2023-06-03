@@ -20,4 +20,22 @@
 
 ## Gallery
 
-![Home Screen](./assets/HomeScreen.png) ![Closet Tab](./assets/ClosetScreen.png) ![Add Item](./assets/AddItemScreen.png) ![Select Photo](./assets/SelectPhotoScreen.png) ![Add Metadata](./assets/MetadataScreen.png)
+### Home Screen
+
+<img src="./assets/HomeScreen.png" />
+
+### Closet Tab
+
+<img src="./assets/ClosetScreen.png" />
+
+### Add Item
+
+<img src="./assets/AddItemScreen.png" />
+
+### Select Photo
+
+<img src="./assets/SelectPhotoScreen.png" />
+
+### Add Metadata
+
+<img src="./assets/MetadataScreen.png" />
