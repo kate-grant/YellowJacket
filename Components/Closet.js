@@ -17,7 +17,6 @@ export default function Closet({navigation, route}) {
     }
     fetchData();
   }, []);
-
   const getData = () => {
     console.log('get');
     try {
@@ -28,11 +27,16 @@ export default function Closet({navigation, route}) {
           for (let i = 0; i < res.rows.length; ++i) {
             temp.push(res.rows.item(i));
             const item = res.rows.item(i);
-            if (colors.filter(color => color === item.Colors).length < 1) {
-              setColors([...colors, item.Colors]);
-              console.log(colors);
+            // console.log('111', item.Colors);
+            if (colors.length === 0 || !colors.includes(item.Colors)) {
+              // console.log('aaa', item.Colors);
+              const c = colors;
+              c.push(item.Colors);
+              setColors(c);
+              // console.log('bbb', colors);
             }
           }
+          // console.log(colors);
           setItems(temp);
         });
       }, errorCB);
@@ -52,8 +56,10 @@ export default function Closet({navigation, route}) {
         style={{
           fontSize: 30,
           margin: 20,
+          alignSelf: 'flex-start',
+          backgroundColor: '#F1FFBB',
         }}>
-        My Closet!
+        My Closet
       </Text>
       {items.length > 0 ? (
         <ScrollView style={{flexDirection: 'column'}}>
@@ -61,15 +67,17 @@ export default function Closet({navigation, route}) {
             style={{
               fontSize: 18,
               margin: 20,
+              backgroundColor: '#F1FFBB',
             }}>
             My Colors
           </Text>
           <ScrollView horizontal={true} style={{flex: 1}}>
-            {colors.map(color => {
+            {colors.map((color, i) => {
               console.log('ccc', color);
               const c = color.toLowerCase();
               return (
                 <View
+                  key={i}
                   style={{
                     height: 80,
                     width: 80,
@@ -85,6 +93,7 @@ export default function Closet({navigation, route}) {
             style={{
               fontSize: 18,
               margin: 20,
+              backgroundColor: '#F1FFBB',
             }}>
             My Clothing
           </Text>

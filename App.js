@@ -70,7 +70,7 @@ function Home() {
           top: 0,
           zIndex: 10,
         }}>
-        Looking Sharp!
+        YOU LOOK GOOD!
       </Text>
       <View
         style={{
