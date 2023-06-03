@@ -26,18 +26,22 @@
 
 <img src="./assets/HomeScreen.png" width="40%"/>
 <br><br>
+
 ### Closet Tab
 
 <img src="./assets/ClosetScreen.png" width="40%"/>
 <br><br>
+
 ### Add Item
 
 <img src="./assets/AddItemScreen.png" width="40%"/>
 <br><br>
+
 ### Select Photo
 
 <img src="./assets/SelectPhotoScreen.png" width="40%"/>
 <br><br>
+
 ### Add Metadata
 
 <img src="./assets/MetadataScreen.png" width="40%"/>
