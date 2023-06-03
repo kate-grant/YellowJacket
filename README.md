@@ -13,10 +13,12 @@
 
 ## Features
 
-&emsp;👋 Create a profile
-&emsp;📷 Upload or take pictures of clothing items
-&emsp;👒 Categorize items by type and color
-&emsp;🎨 Create collections of items as outfits
+<ul align="left">
+  <li>👋 Create a profile</li>
+  <li>📷 Upload or take pictures of clothing items</li>
+  <li>👒 Categorize items by type and color</li>
+  <li>🎨 Create collections of items as outfits</li>
+</ul>
 
 ## Gallery
 
